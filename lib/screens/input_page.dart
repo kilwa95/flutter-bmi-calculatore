@@ -1,11 +1,12 @@
 import 'package:bmi_calculator/screens/resultes_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import '../calculator_brain.dart';
-import '../components/BottomButton.dart';
-import '../components/IconContent.dart';
-import '../components/ReusableCard.dart';
-import '../components/RoundIconButton.dart';
+import '../components/bottom_button.dart';
+import '../components/icon_content.dart';
+import '../components/reusable_card.dart';
+import '../components/round_icon_button.dart';
 import '../constants.dart';
 
 enum Gender {
@@ -17,7 +18,7 @@ class InputPage extends StatefulWidget {
   const InputPage({super.key});
 
   @override
-  _InputPageState createState() => _InputPageState();
+  State<InputPage> createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
@@ -124,7 +125,6 @@ class _InputPageState extends State<InputPage> {
                   ),
                 ],
               ),
-              onPress: () {},
             ),
           ),
           Expanded(
@@ -137,7 +137,7 @@ class _InputPageState extends State<InputPage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         const Text(
-                          'HEIGHT',
+                          'WEIGHT',
                           style: labelTextStyle,
                         ),
                         Text(
@@ -170,7 +170,6 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ],
                     ),
-                    onPress: () {},
                   ),
                 ),
                 Expanded(
@@ -213,7 +212,6 @@ class _InputPageState extends State<InputPage> {
                         )
                       ],
                     ),
-                    onPress: () {},
                   ),
                 ),
               ],
@@ -222,15 +220,15 @@ class _InputPageState extends State<InputPage> {
           BottomButton(
             title: "CALCULATE",
             onTap: () {
-              CalculatorBrain calc =
+              final CalculatorBrain calc =
                   CalculatorBrain(height: height, weight: weight);
               Navigator.push(
                 context,
-                MaterialPageRoute(
+                MaterialPageRoute<ResultsPage>(
                   builder: (BuildContext context) => ResultsPage(
-                    bmiResult: calc.calculateBMI(),
-                    resultText: calc.getResult(),
-                    interpretation: calc.getInterpretation(),
+                    bmiResult: calc.bmi,
+                    resultText: calc.result,
+                    interpretation: calc.interpretation,
                   ),
                 ),
               );
